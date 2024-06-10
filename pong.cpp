@@ -281,7 +281,7 @@ int main()
 {
     Client *Cliente = new Client();
 
-        Cliente->Enviar("Aquí va el mensaje a enviar");
+        Cliente->Enviar("AquÃ­ va el mensaje a enviar");
         Cliente->Recibir();
     while(!game_over()){
         teclear();
@@ -294,9 +294,15 @@ int main()
     pinta_goles();
 
 
-    gotoxy(35,15);
-    printf("GAME OVER!");
+    gotoxy(33,13);
 
+    if (puntos_a == 10){
+
+        printf("GANA EL JUGADOR A");
+    }
+    else{
+        printf("GANA EL JUGADOR B");
+    }
 
 
     Cliente->CerrarSocket();
