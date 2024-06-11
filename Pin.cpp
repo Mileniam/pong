@@ -35,7 +35,7 @@ public:
         }
     }
 
-    string Recibir()
+    void Recibir()
     {
       recv(client, buffer, sizeof(buffer), 0);
       cout << "El cliente dice: " << buffer << endl;
@@ -301,8 +301,62 @@ int main()
     pinta_goles();
 
 
-    gotoxy(35,15);
-    printf("GAME OVER!");
+    //escala de ganadores
+
+    int puntajes_ja[4] = {3,3,3,0};
+    int puntajes_jb[4] = {0,0,1,0};
+
+    int aux, auxb;
+
+    puntajes_ja[3] = puntos_a;
+    puntajes_jb[3] = puntos_b;
+
+
+
+         for(int o=0;o<4;o++){
+            for(int j=0;j<3;j++){
+                if(puntajes_ja[j] > puntajes_ja[j+1]){
+                    aux = puntajes_ja[j];
+                    puntajes_ja[j] = puntajes_ja[j+1];
+                    puntajes_ja[j+1] = aux;
+                }
+            }
+        }
+
+         for(int w=0;w<4;w++){
+            for(int e=0;e<3;e++){
+                if(puntajes_jb[e] > puntajes_jb[e+1]){
+                    auxb = puntajes_jb[e];
+                    puntajes_jb[e] = puntajes_jb[e+1];
+                    puntajes_jb[e+1] = auxb;
+                }
+            }
+        }
+
+        gotoxy(87, 0); std::cout<<"LOS MEJORES PUNTAJES: ";
+        gotoxy(87, 2); std::cout<<"jugador a   |  jugador b";
+
+
+        gotoxy(87, 3); std::cout << "     " <<puntajes_ja[3]<< "    vs     " <<puntajes_jb[3];
+        gotoxy(87, 4); std::cout << "     " <<puntajes_ja[2]<< "    vs     " <<puntajes_jb[2];
+        gotoxy(87, 5); std::cout << "     " <<puntajes_ja[1]<< "    vs     " <<puntajes_jb[1];
+
+
+
+
+    //anunciar al ganador
+    gotoxy(33,13);
+
+    if (puntos_a == 10){
+
+        printf("GANA EL JUGADOR A");
+    }
+    else{
+        printf("GANA EL JUGADOR B");
+    }
+
+
+
 
     Servidor->CerrarSocket();
     getch();
